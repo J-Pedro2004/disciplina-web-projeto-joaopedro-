@@ -1,4 +1,3 @@
-<!-- /templates/alunos.html -->
 <!DOCTYPE html>
 <html lang="pt-br" xmlns:th="http://www.thymeleaf.org">
 <head>
@@ -8,46 +7,48 @@
 </head>
 <body class="bg-light">
 <div class="container mt-5">
-    <h1 class="text-center text-primary">Lista de Alunos</h1>
+    <div class="d-flex justify-content-between align-items-center mb-3">
+        <h1 class="text-primary">Lista de Alunos</h1>
+        <a th:href="@{/disciplinas}" class="btn btn-secondary">Disciplinas</a>
+    </div>
 
     <!-- Mensagens de sucesso e erro -->
     <div th:if="${mensagem}" class="alert alert-success text-center" th:text="${mensagem}"></div>
     <div th:if="${erro}" class="alert alert-danger text-center" th:text="${erro}"></div>
 
     <!-- Formulário de busca -->
-<form action="/alunos/busca" method="get" class="d-flex mb-4">
-    <input type="text" name="nome" placeholder="Buscar por nome" class="form-control me-2">
-    <input type="text" name="matricula" placeholder="Buscar por matrícula" class="form-control me-2">
-    <input type="email" name="email" placeholder="Buscar por e-mail" class="form-control me-2">
-    <button type="submit" class="btn btn-primary">Buscar</button>
-</form>
-
-    <div class="d-flex justify-content-between mb-3">
-        <a th:href="@{/}" class="btn btn-secondary">Página Principal</a>
-        <a th:href="@{/alunos/create}" class="btn btn-primary">Cadastrar Novo Aluno</a>
-    </div>
+    <form action="/alunos/busca" method="get" class="d-flex mb-4">
+        <input type="text" name="nome" placeholder="Buscar por nome" class="form-control me-2">
+        <input type="text" name="matricula" placeholder="Buscar por matrícula" class="form-control me-2">
+        <input type="email" name="email" placeholder="Buscar por e-mail" class="form-control me-2">
+        <input type="text" name="disciplina" placeholder="Buscar por disciplina" class="form-control me-2">
+        <button type="submit" class="btn btn-primary">Buscar</button>
+    </form>
 
     <!-- Tabela de alunos -->
     <table class="table table-striped">
         <thead>
-        <tr>
-            <th>Nome</th>
-            <th>Matrícula</th>
-            <th>Email</th>
-            <th>Ações</th>
-        </tr>
+            <tr>
+                <th>Nome</th>
+                <th>Matrícula</th>
+                <th>E-mail</th>
+                <th>Ações</th>
+            </tr>
         </thead>
         <tbody>
-        <tr th:each="aluno : ${alunos}">
-            <td th:text="${aluno.nome}">Nome</td>
-            <td th:text="${aluno.matricula}">Matrícula</td>
-            <td th:text="${aluno.email}">Email</td>
-            <td>
-                <a th:href="@{/alunos/update/{id}(id=${aluno.id})}" class="btn btn-warning btn-sm">Editar</a>
-                <a th:href="@{/alunos/delete/confirm/{id}(id=${aluno.id})}" class="btn btn-danger btn-sm">Excluir</a>
-        </tr>
+            <tr th:each="aluno : ${alunos}">
+                <td th:text="${aluno.nome}"></td>
+                <td th:text="${aluno.matricula}"></td>
+                <td th:text="${aluno.email}"></td>
+                <td>
+                    <a th:href="@{/alunos/update/{id}(id=${aluno.id})}" class="btn btn-warning btn-sm">Editar</a>
+                    <a th:href="@{/alunos/delete/confirm/{id}(id=${aluno.id})}" class="btn btn-danger btn-sm">Excluir</a>
+                    <a th:href="@{/alunos/{id}/telefones(id=${aluno.id})}" class="btn btn-info btn-sm">Telefones</a>
+                </td>
+            </tr>
         </tbody>
     </table>
+    <a th:href="@{/alunos/create}" class="btn btn-success mt-3">Novo Aluno</a>
 </div>
 </body>
 </html>

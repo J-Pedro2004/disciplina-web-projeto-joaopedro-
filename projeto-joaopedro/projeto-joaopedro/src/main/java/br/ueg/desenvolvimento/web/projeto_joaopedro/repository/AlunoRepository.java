@@ -10,6 +10,7 @@ public interface AlunoRepository extends JpaRepository<Aluno, Integer> {
     List<Aluno> findByNomeContainingIgnoreCase(String nome);
     List<Aluno> findByMatriculaContainingIgnoreCase(String matricula);
     List<Aluno> findByEmailContainingIgnoreCase(String email);
+    List<Aluno> findDistinctByDisciplinasNomeContainingIgnoreCase(String nome);
     boolean existsByMatricula(String matricula);
     boolean existsByEmail(String email);
     boolean existsByMatriculaAndIdNot(String matricula, Integer id);

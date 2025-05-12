@@ -1,9 +1,17 @@
 package br.ueg.desenvolvimento.web.projeto_joaopedro.model;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.JoinTable;
+import jakarta.persistence.ManyToMany;
+import jakarta.persistence.OneToMany;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 
@@ -23,6 +31,17 @@ public class Aluno {
     @Email(message = "Email inválido")
     @NotBlank(message = "Email é obrigatório")
     private String email;
+
+    @OneToMany(mappedBy = "aluno", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<TelefoneAluno> telefones = new ArrayList<>();
+
+    @ManyToMany
+    @JoinTable(
+        name = "aluno_disciplina",
+        joinColumns = @JoinColumn(name = "aluno_id"),
+        inverseJoinColumns = @JoinColumn(name = "disciplina_id")
+    )
+    private List<Disciplina> disciplinas = new ArrayList<>();
 
     public Aluno() {
     }
@@ -63,5 +82,21 @@ public class Aluno {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public List<TelefoneAluno> getTelefones() {
+        return telefones;
+    }
+
+    public void setTelefones(List<TelefoneAluno> telefones) {
+        this.telefones = telefones;
+    }
+
+    public List<Disciplina> getDisciplinas() {
+        return disciplinas;
+    }
+
+    public void setDisciplinas(List<Disciplina> disciplinas) {
+        this.disciplinas = disciplinas;
     }
 }

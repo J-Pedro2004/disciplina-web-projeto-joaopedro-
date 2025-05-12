@@ -25,6 +25,15 @@
             <input type="email" id="email" th:field="*{email}" class="form-control" required>
             <div class="text-danger" th:errors="*{email}"></div>
 
+            <!-- Seleção de Disciplinas -->
+            <label for="disciplinas" class="mt-3">Disciplinas:</label>
+            <select id="disciplinas" name="disciplinas" multiple class="form-control" th:field="*{disciplinas}">
+                <option th:each="disciplina : ${todasDisciplinas}"
+                        th:value="${disciplina.id}"
+                        th:text="${disciplina.nome}">
+                </option>
+            </select>
+
             <button type="submit" class="btn btn-success mt-3">Salvar</button>
             <a th:href="@{/alunos}" class="btn btn-secondary mt-3">Cancelar</a>
         </form>

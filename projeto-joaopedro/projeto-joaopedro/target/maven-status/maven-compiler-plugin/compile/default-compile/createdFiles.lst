@@ -1,0 +1,5 @@
+br\ueg\desenvolvimento\web\projeto_joaopedro\ProjetoJoaopedroApplication.class
+br\ueg\desenvolvimento\web\projeto_joaopedro\AlunoController.class
+br\ueg\desenvolvimento\web\projeto_joaopedro\repository\AlunoRepository.class
+br\ueg\desenvolvimento\web\projeto_joaopedro\model\Aluno.class
+br\ueg\desenvolvimento\web\projeto_joaopedro\Home.class
